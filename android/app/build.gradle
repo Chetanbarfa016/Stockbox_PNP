@@ -1,0 +1,116 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+//    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services'
+//def keystoreProperties = new Properties()
+////def keystorePropertiesFile = rootProject.file('key.properties')
+////if (keystorePropertiesFile.exists()) {
+////    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+////}
+
+android {
+    compileSdkVersion 34
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.example.stock_box"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0.1"
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+//    signingConfigs {
+//        release {
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+//            storePassword keystoreProperties['storePassword']
+//        }
+//    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.android.gms:play-services-mlkit-face-detection:16.2.0'
+    implementation 'com.github.digio-tech:gateway:v4.0.10'
+    implementation 'com.github.digio-tech:gateway_kyc:v4.0.15'
+    implementation 'androidx.core:core:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.camera:camera-camera2:1.2.2"
+    implementation "androidx.camera:camera-lifecycle:1.2.2"
+    implementation "androidx.camera:camera-view:1.2.2"
+    implementation "androidx.camera:camera-core:1.2.2"
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'com.google.android.gms:play-services-mlkit-face-detection:17.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+}

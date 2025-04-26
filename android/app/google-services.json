@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "700230984522",
+    "project_id": "stockbox-15e55",
+    "storage_bucket": "stockbox-15e55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700230984522:android:477d05434933dfaf0497b3",
+        "android_client_info": {
+          "package_name": "com.example.stock_box"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyiifIFyawlJbLJX8J9VdJKDQF-xW93f0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
